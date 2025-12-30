@@ -7,14 +7,11 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class Menu {
-//    private final ArraysProcessor ag = new ArraysProcessor();
     private final Scanner scanner;
-//    private static final ArrayMode ENCODE_MODE = ArrayMode.ENCODE;
-//    private static final ArrayMode DECODE_MODE = ArrayMode.DECODE;
     private static final String DEFAULT_FILE_LOCATION = "./out.txt";
 
-    private static String mapFileLocation = "";
-    private static String inputFileLocation = "";
+    private static String queryFileLocation = "";
+    private static String subjectFileLocation = "";
     private static String outputFileLocation = "";
 
 
@@ -35,39 +32,30 @@ public class Menu {
             Object[][] mapItems;
             switch (menuItem) {
                 case 1 -> {
-//                    mapFileLocation = getFileLocationFromUser("Please enter the location of the mapping file",
-//                            "Mapping");
+                    queryFileLocation = getFileLocationFromUser("Enter Query File",
+                            "Mapping");
                 }
                 case 2 -> {
-//                    inputFileLocation = getFileLocationFromUser("Please enter the location of the input file",
-//                            "Input");
+                    subjectFileLocation = getFileLocationFromUser("Enter Subject File",
+                            "Input");
                 }
                 case 3 -> {
-//                    outputFileLocation = getFileLocationFromUser("Please enter the location of the output file",
-//                            "Output");
+                    outputFileLocation = getFileLocationFromUser("Please enter the location of the output file",
+                            "Output");
                 }
                 case 4 -> {
-                    isEmptyFileLocations(mapFileLocation, inputFileLocation);
-//                    mapItems = ArraysProcessor.getArray(mapFileLocation);
-                    if (!mapFileLocation.isEmpty() && !inputFileLocation.isEmpty()) {
-                        out.println("Begin Encoding");
+                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
+                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
+                        out.println("Begin Analysis");
                         if (outputFileLocation.isEmpty()) {
-//                            CipherProcessor.decode(inputFileLocation, mapItems, ENCODE_MODE);
                         } else {
-//                            FileReader.processFile(inputFileLocation, outputFileLocation, mapItems, ENCODE_MODE);
                         }
                     } else {
-                        UtilMethods.printErrorMessage("Map file location or input file location isn't specified");
+                        UtilMethods.printErrorMessage("Query file location or Subject file location is empty");
                     }
                 }
                 case 5 -> {
-//                    out.println("Begin Decoding");
-//
-//                    mapItems = ArraysProcessor.getArray(mapFileLocation);
-//                    CipherProcessor.decode(DEFAULT_FILE_LOCATION, mapItems, DECODE_MODE);
-                }
-                case 6 -> {
-                    out.println("Goodbye! 6");
+                    out.println("Goodbye! 5");
                     keepRunning = false;
                 }
                 default -> {
@@ -85,7 +73,7 @@ public class Menu {
      * @param fileType Type of file for
      * @return The file location got from the user
      */
-    private String getRequestFromUser(String promptMessage, String fileType) {
+    private String getFileLocationFromUser(String promptMessage, String fileType) {
         out.println(promptMessage);
         scanner.nextLine(); // Consume the newline character
         String fileLocation = scanner.nextLine();
@@ -106,7 +94,7 @@ public class Menu {
         boolean isNoFile = false;
         String logMessage;
         if (mapFileLocation.isEmpty()) {
-            logMessage = UtilMethods.buildString("No mapping file specified");
+            logMessage = UtilMethods.buildString("No file specified");
             out.println(logMessage);
             isNoFile = true;
         }
@@ -117,8 +105,6 @@ public class Menu {
 
         return isNoFile;
     }
-
-
 
 
     public void renderMenu() {
@@ -135,7 +121,7 @@ public class Menu {
         System.out.println("(3) Specify Output File (default: ./out.txt)");
         System.out.println("(4) Execute, Analyse and Report");
         System.out.println("(5) Optional Extras...");
-        System.out.println("(?) Quit");
+        System.out.println("(6) Quit");
 
         //Output a menu of options and solicit text from the user
         System.out.print(ConsoleColour.BLACK_BOLD_BRIGHT);
