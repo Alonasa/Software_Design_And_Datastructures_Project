@@ -1,6 +1,7 @@
 package ie.atu.sw;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -43,8 +44,22 @@ public class Menu {
                             "Output");
                 }
                 case 4 -> {
-                    FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376/text-files/PrinceMachiavelli" +
+                    Map<String, Integer> output1 =  FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376" +
+                            "/text-files/PrinceMachiavelli" +
                             ".txt");
+                    Map<String, Integer> output2 =  FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376" +
+                            "/text-files/PrinceMachiavelli" +
+                            ".txt");
+                    int intersectionSize = SimilarityProcessor.intersectionFinder(output1, output2);
+
+                    double similarity = SimilarityProcessor.similarityFinder(intersectionSize, output1.size(),
+                            output2.size());
+                    String report = FilesProcessor.createReport("Yo", "Yo", output1.size(), output2.size(),
+                            intersectionSize,
+                            similarity);
+
+                    FilesProcessor.writeReport("./out.txt", report);
+
 //                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
 //                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
 //                        out.println("Begin Analysis");

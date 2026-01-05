@@ -8,10 +8,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The FileReader class is responsible for processing file operations:
- * encoding, decoding, or parsing file data.
- * The class provides methods for reading input files,
- * processing content using specific logic,
- * and writing the processed data to output files.
+ * <ul>
+ *   <li>Buffered file reading with a progress indicator</li>
+ *   <li>Lowercased word tokenisation without punctuation</li>
+ *   <li>Similarity report writer</li>
+ * </ul>
+ * Thread-safety: builds maps using {@code ConcurrentHashMap}.
  */
 public class FilesProcessor {
     //Filtering patterns
@@ -20,9 +22,8 @@ public class FilesProcessor {
 
 
     /**
-     * Processes a file by reading its contents, applying encoding
-     * or decoding operations, and writing the results to
-     * a specified output file
+     * Processes a file by reading its contents and building its words map
+     * for future processing
      *
      * @param source the path to the source file
      */
@@ -47,12 +48,11 @@ public class FilesProcessor {
 
                 linesProcessed++;
             }
-            System.out.println(countedElements);
             br.close();
-            System.out.println("Successfully decoded file");
+            System.out.println("Successfully processed file");
 
         } catch (IOException e) {
-            UtilMethods.printErrorMessage("I/O Error on decoding: ", e);
+            UtilMethods.printErrorMessage("I/O Error on processing: ", e);
         }
 
         return countedElements;
@@ -74,21 +74,60 @@ public class FilesProcessor {
      * Generate a report to the file defined by the user
      * @param outputFile output file location
      */
-    public static void writeReport(String outputFile) {
+    public static void writeReport(String outputFile, String report) {
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter(outputFile), 8192);
-
+            out.write(report);
             out.flush();
             out.close();
             System.out.println("Report created");
 
         } catch (IOException e) {
-            UtilMethods.printErrorMessage("I/O Error on decoding: ", e);
+            UtilMethods.printErrorMessage("I/O Error on processing: ", e);
         }
 
     }
 
-
+    /**
+     *
+     * @param subjectFileLocation subject file
+     * @param queryFileLocation query file
+     * @param subjectTokens subject tokens amount
+     * @param queryTokens query tokens amount
+     * @param intersection intersection size
+     * @param percent percentage similarity
+     * @return string for .txt generation
+     */
+    public static String createReport(String subjectFileLocation,
+                                      String queryFileLocation,
+                                      Integer subjectTokens,
+                                      Integer queryTokens,
+                                      Integer intersection,
+                                      Double percent) {
+        String timestamp = java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return String.format(
+                "************************************************************%n" +
+                        "                    REPORT  (%s)%n                       %n" +
+                        "************************************************************%n" +
+                        "Subject File: %s%n %n" +
+                        "Query File:   %s%n %n" +
+                        "Subject Unique Tokens        %d%n                         %n" +
+                        "Query Unique Tokens          %d%n                         %n" +
+                        "************************************************************%n" +
+                        "*Intersection Size:           %d                           %n" +
+                        "                                                          %n" +
+                        "*Similarity:                  %.2f%%%n                      %n" +
+                        "************************************************************%n",
+                timestamp,
+                subjectFileLocation,
+                queryFileLocation,
+                subjectTokens,
+                queryTokens,
+                intersection,
+                percent * 100
+        );
+    }
 
 
     /**
