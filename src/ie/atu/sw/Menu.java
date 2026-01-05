@@ -29,15 +29,14 @@ public class Menu {
             String next = scanner.next();
             int menuItem = UtilMethods.convertToNumber(next);
 
-            Object[][] mapItems;
             switch (menuItem) {
                 case 1 -> {
                     queryFileLocation = getFileLocationFromUser("Enter Query File",
-                            "Mapping");
+                            "Query");
                 }
                 case 2 -> {
                     subjectFileLocation = getFileLocationFromUser("Enter Subject File",
-                            "Input");
+                            "Subject");
                 }
                 case 3 -> {
                     outputFileLocation = getFileLocationFromUser("Please enter the location of the output file",
@@ -86,19 +85,19 @@ public class Menu {
     /**
      * Checks if passing empty file location and print message
      *
-     * @param mapFileLocation   location of mapFile
-     * @param inputFileLocation location of an input file
+     * @param queryFileLocation  location of queryFile
+     * @param subjectFileLocation location of the subject file
      * @return true if something isn't specified
      */
-    private static boolean isEmptyFileLocations(String mapFileLocation, String inputFileLocation) {
+    private static boolean isEmptyFileLocations(String queryFileLocation, String subjectFileLocation) {
         boolean isNoFile = false;
         String logMessage;
-        if (mapFileLocation.isEmpty()) {
+        if (queryFileLocation .isEmpty()) {
             logMessage = UtilMethods.buildString("No file specified");
             out.println(logMessage);
             isNoFile = true;
         }
-        if (inputFileLocation.isEmpty()) {
+        if (subjectFileLocation.isEmpty()) {
             out.println("No input file specified");
             isNoFile = true;
         }
@@ -120,8 +119,7 @@ public class Menu {
         System.out.println("(2) Enter Subject File");
         System.out.println("(3) Specify Output File (default: ./out.txt)");
         System.out.println("(4) Execute, Analyse and Report");
-        System.out.println("(5) Optional Extras...");
-        System.out.println("(6) Quit");
+        System.out.println("(5) Quit");
 
         //Output a menu of options and solicit text from the user
         System.out.print(ConsoleColour.BLACK_BOLD_BRIGHT);
