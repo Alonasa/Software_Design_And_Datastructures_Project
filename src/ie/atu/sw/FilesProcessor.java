@@ -2,11 +2,9 @@ package ie.atu.sw;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 
 /**
  * The FileReader class is responsible for processing file operations:
@@ -15,7 +13,7 @@ import java.util.regex.Pattern;
  * processing content using specific logic,
  * and writing the processed data to output files.
  */
-public class FileReader {
+public class FilesProcessor {
     //Filtering patterns
     private static final String BY_WORD = "\\s+";
     private static final String BY_PUNCTUATION = "[^a-z0-9]+";
@@ -28,7 +26,7 @@ public class FileReader {
      *
      * @param source the path to the source file
      */
-    public Map<String, Integer> processFile(String source) {
+    public static Map<String, Integer> processFile(String source) {
         Map<String, Integer> countedElements = new ConcurrentHashMap<>();
 
         try {
@@ -43,13 +41,13 @@ public class FileReader {
                 System.out.print(ConsoleColour.YELLOW);//Change the colour of the console text
                 ProgressBar.printProgress(linesProcessed + 1, amountOfLines);
                 //Generate a mini array of words from a line element
-                String[] words = line.toLowerCase(Locale.ROOT).replaceAll(BY_PUNCTUATION, "").split(BY_WORD);
+                String[] words = line.toLowerCase(Locale.ROOT).replaceAll(BY_PUNCTUATION, " ").split(BY_WORD);
 
                 tokeniseWords(words, countedElements);
-                System.out.println(countedElements);
 
                 linesProcessed++;
             }
+            System.out.println(countedElements);
             br.close();
             System.out.println("Successfully decoded file");
 
@@ -65,12 +63,30 @@ public class FileReader {
      * @param words the array of the words for process
      * @return counted indices of the elements in the array
      */
-    public void tokeniseWords (String[] words, Map<String, Integer> countedElements){
+    public static void tokeniseWords (String[] words, Map<String, Integer> countedElements){
         for(String word: words) {
             if(!word.isEmpty()){
                 countedElements.put(word, countedElements.getOrDefault(word, 0) + 1);
             }
         }
+    }
+
+    /**
+     * Generate a report to the file defined by the user
+     * @param outputFile output file location
+     */
+    public static void writeReport(String outputFile) {
+        try{
+            BufferedWriter out = new BufferedWriter(new FileWriter(outputFile), 8192);
+
+            out.flush();
+            out.close();
+            System.out.println("Successfully decoded file");
+
+        } catch (IOException e) {
+            UtilMethods.printErrorMessage("I/O Error on decoding: ", e);
+        }
+
     }
 
 

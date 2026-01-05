@@ -43,15 +43,17 @@ public class Menu {
                             "Output");
                 }
                 case 4 -> {
-                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
-                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
-                        out.println("Begin Analysis");
-                        if (outputFileLocation.isEmpty()) {
-                        } else {
-                        }
-                    } else {
-                        UtilMethods.printErrorMessage("Query file location or Subject file location is empty");
-                    }
+                    FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376/text-files/PrinceMachiavelli" +
+                            ".txt");
+//                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
+//                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
+//                        out.println("Begin Analysis");
+////                        if (outputFileLocation.isEmpty()) {
+////                        } else {
+////                        }
+//                    } else {
+//                        UtilMethods.printErrorMessage("Query file location or Subject file location is empty");
+//                    }
                 }
                 case 5 -> {
                     out.println("Goodbye! 5");
