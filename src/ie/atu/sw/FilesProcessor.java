@@ -61,7 +61,6 @@ public class FilesProcessor {
     /**
      * Words tokenisation, Concurrent hash map was used for the work with threads
      * @param words the array of the words for process
-     * @return counted indices of the elements in the array
      */
     public static void tokeniseWords (String[] words, Map<String, Integer> countedElements){
         for(String word: words) {
@@ -81,7 +80,7 @@ public class FilesProcessor {
 
             out.flush();
             out.close();
-            System.out.println("Successfully decoded file");
+            System.out.println("Report created");
 
         } catch (IOException e) {
             UtilMethods.printErrorMessage("I/O Error on decoding: ", e);
