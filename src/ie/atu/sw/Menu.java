@@ -1,12 +1,16 @@
 package ie.atu.sw;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
-
 import static java.lang.System.in;
 import static java.lang.System.out;
 
+
+/**
+ * Render and process menu items
+ * @author Alona Skrypnyk
+ * @version 1.0
+ */
 public class Menu {
     private final Scanner scanner;
     private static final String DEFAULT_FILE_LOCATION = "./out.txt";

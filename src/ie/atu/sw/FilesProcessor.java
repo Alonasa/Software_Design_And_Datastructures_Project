@@ -14,6 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
  *   <li>Similarity report writer</li>
  * </ul>
  * Thread-safety: builds maps using {@code ConcurrentHashMap}.
+ * @author Alona Skrypnyk
+ * @version 1.0
+ *
  */
 public class FilesProcessor {
     //Filtering patterns

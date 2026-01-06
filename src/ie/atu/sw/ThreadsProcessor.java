@@ -10,9 +10,11 @@ import java.util.concurrent.Executors;
 /**
  * ThreadsProcessor class designed to process
  * and compare of 2 files for similarity
- *
- * The class includes a main method for starting the file processing
+ * Class includes a main method for starting the file processing
  * and generates a similarity report. Similarity made with Sørensen–Dice
+ *
+ * @author Alona Skrypnyk
+ * @version 1.0
  */
 public class ThreadsProcessor {
     public static void main(String[] args) {

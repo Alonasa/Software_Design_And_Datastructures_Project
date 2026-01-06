@@ -3,7 +3,9 @@ package ie.atu.sw;
 import java.util.Map;
 
 /**
- * Class which make a similarity calculation, such as Intersection finder and similarity calculation
+ * Calculate similarities, such as Intersection finder and similarity calculation
+ * author Alona Skrypnyk
+ * @version 1.0
  */
 public class SimilarityProcessor {
     /**

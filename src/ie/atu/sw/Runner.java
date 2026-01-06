@@ -1,11 +1,14 @@
 package ie.atu.sw;
 
 /**
- * The entry point for the application.
- * It controls the flow of program execution, continuously displaying
+ * Entry point for the application.
+ * Controls the flow of program execution, continuously displaying
  * a menu of options to the user, accepting inputs, and executing
  * corresponding actions.
  * The program terminates when the user chooses to exit.
+ *
+ * @author Alona Skrypnyk
+ * @version 1.0
  */
 public class Runner {
 	private static final Menu menu = new Menu();

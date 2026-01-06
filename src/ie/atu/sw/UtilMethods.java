@@ -1,10 +1,12 @@
 package ie.atu.sw;
 
+
 /**
- *
  * Utility class providing helper methods for string manipulation, error message handling,
  * and conversion of strings to numbers. This class is designed for general-purpose use
  * within other classes and contains static methods that can be accessed directly.
+ * @author Alona Skrypnyk
+ * @version 1.0
  */
 public class UtilMethods {
     private UtilMethods() {
