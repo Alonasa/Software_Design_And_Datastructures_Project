@@ -16,11 +16,6 @@ import java.util.concurrent.Executors;
  */
 public class ThreadsProcessor {
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.err.println("Usage: java VirtualThreadDemo <filePath1> <filePath2>");
-            System.exit(1);
-        }
-
         String filePath1 = args[0];
         String filePath2 = args[1];
         String reportFileLocation = args[2];
@@ -41,16 +36,12 @@ public class ThreadsProcessor {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    void go(String filePath1, String filePath2, String reportFileLocation)
+    public void go(String filePath1, String filePath2, String reportFileLocation)
             throws ExecutionException, InterruptedException {
 
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
-
-            Callable<Map<String, Integer>> task1 =
-                    () -> FilesProcessor.processFile(filePath1);
-
-            Callable<Map<String, Integer>> task2 =
-                    () -> FilesProcessor.processFile(filePath2);
+            Callable<Map<String, Integer>> task1 = () -> FilesProcessor.processFile(filePath1);
+            Callable<Map<String, Integer>> task2 = () -> FilesProcessor.processFile(filePath2);
 
             var future1 = executor.submit(task1);
             var future2 = executor.submit(task2);

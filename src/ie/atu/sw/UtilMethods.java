@@ -10,18 +10,16 @@ public class UtilMethods {
     private UtilMethods() {
     }
 
+    /**
+     * Constructs a single string from provided arguments.
+     *
+     * @param args one or more objects
+     * @return single string value
+     */
     public static String buildString(Object... args){
         StringBuilder messageString = new StringBuilder(4);
         for (Object arg: args){
             messageString.append(" ").append(arg);
-        }
-        return messageString.toString().trim();
-    }
-
-    public static String buildWord(Object... args){
-        StringBuilder messageString = new StringBuilder(4);
-        for (Object arg: args){
-            messageString.append(arg);
         }
         return messageString.toString().trim();
     }
