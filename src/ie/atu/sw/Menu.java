@@ -1,8 +1,8 @@
 package ie.atu.sw;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
@@ -29,6 +29,7 @@ public class Menu {
         try {
             String next = scanner.next();
             int menuItem = UtilMethods.convertToNumber(next);
+            ThreadsProcessor threadsProcessor = new ThreadsProcessor();
 
             switch (menuItem) {
                 case 1 -> {
@@ -44,31 +45,17 @@ public class Menu {
                             "Output");
                 }
                 case 4 -> {
-                    Map<String, Integer> output1 =  FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376" +
-                            "/text-files/PrinceMachiavelli" +
-                            ".txt");
-                    Map<String, Integer> output2 =  FilesProcessor.processFile("F:/A_HDIP_PROJECTS/OOSD/G004473376" +
-                            "/text-files/PrinceMachiavelli" +
-                            ".txt");
-                    int intersectionSize = SimilarityProcessor.intersectionFinder(output1, output2);
-
-                    double similarity = SimilarityProcessor.similarityFinder(intersectionSize, output1.size(),
-                            output2.size());
-                    String report = FilesProcessor.createReport("Yo", "Yo", output1.size(), output2.size(),
-                            intersectionSize,
-                            similarity);
-
-                    FilesProcessor.writeReport("./out.txt", report);
-
-//                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
-//                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
-//                        out.println("Begin Analysis");
-////                        if (outputFileLocation.isEmpty()) {
-////                        } else {
-////                        }
-//                    } else {
-//                        UtilMethods.printErrorMessage("Query file location or Subject file location is empty");
-//                    }
+                    isEmptyFileLocations(queryFileLocation, subjectFileLocation);
+                    if (!queryFileLocation.isEmpty() && !subjectFileLocation.isEmpty()) {
+                        out.println("Begin Analysis");
+                        if (outputFileLocation.isEmpty()) {
+                            threadsProcessor.go(queryFileLocation, subjectFileLocation, DEFAULT_FILE_LOCATION);
+                        } else {
+                            threadsProcessor.go(queryFileLocation, subjectFileLocation, outputFileLocation);
+                        }
+                    } else {
+                        UtilMethods.printErrorMessage("Query file location or Subject file location is empty");
+                    }
                 }
                 case 5 -> {
                     out.println("Goodbye! 5");
@@ -80,6 +67,8 @@ public class Menu {
             }
         } catch (NumberFormatException e) {
             UtilMethods.printErrorMessage("Invalid array Index: ", e);
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return keepRunning;
     }
@@ -104,22 +93,16 @@ public class Menu {
      *
      * @param queryFileLocation  location of queryFile
      * @param subjectFileLocation location of the subject file
-     * @return true if something isn't specified
      */
-    private static boolean isEmptyFileLocations(String queryFileLocation, String subjectFileLocation) {
-        boolean isNoFile = false;
+    private static void isEmptyFileLocations(String queryFileLocation, String subjectFileLocation) {
         String logMessage;
         if (queryFileLocation .isEmpty()) {
             logMessage = UtilMethods.buildString("No file specified");
             out.println(logMessage);
-            isNoFile = true;
         }
         if (subjectFileLocation.isEmpty()) {
             out.println("No input file specified");
-            isNoFile = true;
         }
-
-        return isNoFile;
     }
 
 

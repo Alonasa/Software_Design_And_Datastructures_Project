@@ -20,7 +20,6 @@ public class FilesProcessor {
     private static final String BY_WORD = "\\s+";
     private static final String BY_PUNCTUATION = "[^a-z0-9]+";
 
-
     /**
      * Processes a file by reading its contents and building its words map
      * for future processing
@@ -34,9 +33,7 @@ public class FilesProcessor {
             BufferedReader br = getBufferedReader(source);
             int amountOfLines = getAmountOfLines(source);
             int linesProcessed = 0;
-
             String line;
-
 
             while ((line = br.readLine()) != null) {
                 System.out.print(ConsoleColour.YELLOW);//Change the colour of the console text
@@ -49,6 +46,7 @@ public class FilesProcessor {
                 linesProcessed++;
             }
             br.close();
+            System.out.println();
             System.out.println("Successfully processed file");
 
         } catch (IOException e) {
@@ -135,7 +133,7 @@ public class FilesProcessor {
      * @param source - address of the source to process
      * @return BufferedReader or null
      */
-    public static BufferedReader getBufferedReader(String source) {
+    private static BufferedReader getBufferedReader(String source) {
         // Creates a BufferedReader for the specified source file
         BufferedReader result = null;
 
@@ -155,7 +153,7 @@ public class FilesProcessor {
      * @param source the file location
      * @return number of lines
      */
-    public static int getAmountOfLines(String source) {
+    private static int getAmountOfLines(String source) {
         int amountOfLines = 0;
         try (BufferedReader br = getBufferedReader(source)) {
             while (br.readLine() != null) {
