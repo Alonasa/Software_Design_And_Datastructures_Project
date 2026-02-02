@@ -1,7 +1,7 @@
 ---
 # The Sørensen-Dice application
 ---
-The Sørensen-Dice similarity console application computes two text documents. The user selects Subject file and Query file, and an optional output path through a menu-driven user interface. The program changes both files into presence-only word sets, calculates the Dice similarity, provides a clear summary, and saves a formatted report to disk.
+The Sørensen-Dice similarity console application computes two text documents. The user selects **Subject file** and **Query file**, and an optional output path through a menu-driven user interface. The program changes both files into presence-only word sets, calculates the Dice similarity, provides a clear summary, and saves a formatted report to disk.
 Subject and Query files require the full path, or the user will receive the error.
 
 ### Key Features
@@ -10,7 +10,7 @@ Subject and Query files require the full path, or the user will receive the erro
 - Callable tasks for clean control of concurrency
 - Thread-safe token storage using ConcurrentHashMap
 - Word tokenisation: lowercase, punctuation removed (UTF‑8 I/O, buffered)
-- Sørensen-Dice similarity on presence-only sets: dice = (2 × |A ∩ B|) / (|A| + |B|)
+- Sørensen-Dice similarity on presence-only sets: **dice = (2 × |A ∩ B|) / (|A| + |B|)**
 - Report includes file paths, unique token counts, intersection size, and percentage similarity
 
 ### Architecture (package ie.atu.sw)
@@ -31,7 +31,7 @@ Subject and Query files require the full path, or the user will receive the erro
 - Build JAR: jar -cf dice.jar *
 - Run: java -cp .\dice.jar ie.atu.sw.Runner
 
-Requirements and Notes
+### Requirements and Notes
 - Java 21 (virtual threads) recommended
 - The application is very simple and based on the beginner level programming skills
 
