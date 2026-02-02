@@ -1,8 +1,8 @@
-###The Sørensen-Dice application
+### The Sørensen-Dice application
 The Sørensen-Dice similarity console application computes two text documents. The user selects Subject file and Query file, and an optional output path through a menu-driven user interface. The program changes both files into presence-only word sets, calculates the Dice similarity, provides a clear summary, and saves a formatted report to disk.
 Subject and Query files require the full path, or the user will receive the error.
 
-Key Features
+## Key Features
 - Menu-based console user interface for file input and execution(Used from the previous project)
 - Concurrent processing of Subject and Query using virtual threads (Java 21)
 - Callable tasks for clean control of concurrency
