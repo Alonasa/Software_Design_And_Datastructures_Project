@@ -9,8 +9,8 @@ Subject and Query files require the full path, or the user will receive the erro
 - Concurrent processing of Subject and Query using virtual threads (Java 21)
 - Callable tasks for clean control of concurrency
 - Thread-safe token storage using ConcurrentHashMap
-- Word tokenisation: lowercase, punctuation removed (UTF‑8 I/O, buffered)
-- Sørensen-Dice similarity on presence-only sets: **dice = (2 × |A ∩ B|) / (|A| + |B|)**
+- **Word tokenisation:** lowercase, punctuation removed (UTF‑8 I/O, buffered)
+- **Sørensen-Dice similarity on presence-only sets:** **dice = (2 × |A ∩ B|) / (|A| + |B|)**
 - Report includes file paths, unique token counts, intersection size, and percentage similarity
 
 ## Architecture (package ie.atu.sw)
